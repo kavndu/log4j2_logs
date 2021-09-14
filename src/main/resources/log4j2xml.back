@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+	<Properties>
+		<Property name="LOG_PATTERN">
+			%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
+		</Property>
+	</Properties>
+	<Appenders>
+	  <File name="MyFile" fileName="logs/app.log">
+        <PatternLayout>
+         <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+      </PatternLayout>
+    </File>
+		<Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+<!--			<PatternLayout pattern="${LOG_PATTERN}"/>-->
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} traceId: %X{trace_id} spanId: %X{span_id} - %msg%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Logger name="com.example.log4j2demo" level="info" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="MyFile" />
+			
+		</Logger>
+
+		<Root level="info">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="MyFile" />
+		</Root>
+	</Loggers>
+</Configuration>
+
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<Configuration status="WARN">-->
+<!--<Appenders>-->
+<!--	<Console name="Console" target="SYSTEM_OUT">-->
+<!--		<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} traceId: %X{trace_id} spanId: %X{span_id} - %msg%n" />-->
+<!--	</Console>-->
+<!--</Appenders>-->
+<!--<Loggers>-->
+<!--	<Root level="All" >-->
+<!--		<AppenderRef ref="Console"/>-->
+<!--	</Root>-->
+<!--</Loggers>-->
+<!--</Configuration>-->
